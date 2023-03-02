@@ -14,11 +14,6 @@ app.use('/api/zmanim', zmanimRoutes)
 
 
 const port = 3030
-app.listen(port, () =>  
+app.listen(port, () =>
     console.log(`Server is ready at ${port}`)
 )
-
-
-
-// http://localhost:3030/api/dates?what=Dates&d=09/09/1998
-

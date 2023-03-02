@@ -11,9 +11,10 @@ class DatesService {
     }
 
     async convertHebreow(req, res) {
+        console.log('body', req.body)
         try {
             console.log(req.body)
-            const parameters = req.body.parameters
+            const parameters = req.query.parameters
             const hebDateString = parameters.find(p => p.name === 'תאריך עברי').value
             const hebDate = moment(hebDateString, 'DDMMYYYY').toDate()
             const hebDateObj = new Hebcal.HDate(hebDate)
@@ -23,6 +24,7 @@ class DatesService {
                 "actions": [{ "type": "SendMessage", "text": responseText }]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the Torah portion.')
@@ -48,10 +50,9 @@ class DatesService {
     }
 
     async heDateTodey(req, res) {
+        console.log('body', req.body)
         try {
-            console.log(req.body)
-            const parameters = req.body.parameters
-            const hebDateString = parameters.find(p => p.name === 'תאריך עברי').value
+            const hebDateString = req.body.parameters.find(p => p.name === 'תאריך עברי').value
             let responseText = ''
 
             if (hebDateString === '') {
@@ -64,6 +65,7 @@ class DatesService {
                 "actions": [{ "type": "SendMessage", "text": responseText }]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the dates.')
@@ -72,6 +74,7 @@ class DatesService {
 
     async gDateTodey(req, res) {
         try {
+            console.log('body', req.body)
             const gregorianDateString = req.body.parameters.find(p => p.name === 'תאריך לועזי').value
             const todayDate = new Date()
             const todayHebrewDate = Hebcal.HDate(todayDate)
@@ -86,7 +89,8 @@ class DatesService {
         }
     }
 
-    async convertDate(req, res) {
+
+    async getConvertDate(req, res) {
         try {
             const userInputDate = req.query.d
             const date = new Date(userInputDate)
@@ -102,7 +106,7 @@ class DatesService {
                 const gregDate = hebDate.greg()
                 const gregDateString = moment(gregDate).format('DD/MM/YYYY')
 
-                responseText = `${torahPortion} התאריך המקביל של ${hebDateString} הוא ${gregDateString}.`
+                responseText = `${torahPortion} התאריך המקביל של ${gregDateString} הוא ${gregDateString}.`
             } else {
                 // Input is a valid date, assume it's a Gregorian date
                 const gregDateString = moment(date).format('DD/MM/YYYY')
