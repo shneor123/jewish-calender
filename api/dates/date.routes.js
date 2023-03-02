@@ -1,11 +1,14 @@
 const express = require('express')
-const { convertHebreow, getConvertHebrow, heDateTodey, gDateTodey, convertGregotrian } = require('./date.controller')
+const { jewishService } = require('./date.controller')
 const router = express.Router()
 
-router.get('/', getConvertHebrow)
-router.post('/date', convertHebreow)
-router.post('/date/gre', convertGregotrian)
-router.post('/zmanim/he', heDateTodey)
-router.post('/zmanim', gDateTodey)
+router.get('/', jewishService.convertDate)
+router.get('/gHeDate', jewishService.getHeDateTodey)
+router.get('/gDate', jewishService.getDateTodey)
+
+router.post('/date', jewishService.convertHebreow)
+router.post('/date/gre', jewishService.convertGregotrian)
+router.post('/zmanim/he', jewishService.heDateTodey)
+router.post('/zmanim', jewishService.gDateTodey)
 
 module.exports = router
