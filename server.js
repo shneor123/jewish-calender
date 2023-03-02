@@ -12,12 +12,13 @@ const zmanimRoutes = require('./api/zmanim/zman.routes')
 app.use('/api/dates', datesRoutes)
 
 app.use('/api/zmanim', zmanimRoutes)
+
 app.use('/', (req, res) => {
     console.log("hey")
-res.send("hello world!")
+    res.send("hello world!")
 })
 
-const port = 80
+const port = 3030
 app.listen(port, () =>
     console.log(`Server is ready at ${port}`)
 )
