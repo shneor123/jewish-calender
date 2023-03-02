@@ -13,6 +13,7 @@ app.use('/api/dates', datesRoutes)
 
 app.use('/api/zmanim', zmanimRoutes)
 app.use('/', (req, res) => {
+    console.log("hey")
 res.send("hello world!")
 })
 
