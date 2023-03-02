@@ -17,7 +17,7 @@ app.use('/', (req, res) => {
 res.send("hello world!")
 })
 
-const port = 3030
+const port = 80
 app.listen(port, () =>
     console.log(`Server is ready at ${port}`)
 )
