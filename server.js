@@ -10,8 +10,11 @@ const datesRoutes = require('./api/dates/date.routes')
 const zmanimRoutes = require('./api/zmanim/zman.routes')
 
 app.use('/api/dates', datesRoutes)
-app.use('/api/zmanim', zmanimRoutes)
 
+app.use('/api/zmanim', zmanimRoutes)
+app.use('/api/zmanim', (req, res) => {
+res.send("hello world!")
+})
 
 const port = 3030
 app.listen(port, () =>
