@@ -12,7 +12,7 @@ const zmanimRoutes = require('./api/zmanim/zman.routes')
 app.use('/api/dates', datesRoutes)
 
 app.use('/api/zmanim', zmanimRoutes)
-app.use('/api/zmanim', (req, res) => {
+app.use('/', (req, res) => {
 res.send("hello world!")
 })
 
