@@ -1,5 +1,4 @@
 const HebrewCalendar = require("hebcal")
-const axios = require('axios')
 
 
 class ZmanimService {
