@@ -1,5 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const moment = require('moment');
+const axios = require('axios');
 
 
 const app = express()
@@ -18,11 +20,14 @@ app.use('/', (req, res) => {
     console.log("hey")
     const responseData = {
         "actions": [
-            { "type": "SetParameter", "name": "branch", "value": "הפיח" }
+            { "type": "SendMessage", "name": "branch", "value": "הפיח" }
         ]
     }
     res.send(responseData)
 })
+
+
+
 
 const port = 3030
 app.listen(port, () =>

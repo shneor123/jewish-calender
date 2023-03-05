@@ -101,9 +101,7 @@ class DatesService {
         try {
             const userInputDate = req.query.d
             const date = new Date(userInputDate)
-
             let responseText = ""
-
             if (isNaN(date)) {
                 // Input is not a valid date, assume it's a Hebrew date
                 const hebDate = new Hebcal.HDate(userInputDate)
