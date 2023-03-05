@@ -20,37 +20,41 @@ class ZmanimService {
     }
 
     async next11Month(req, res) {
+        console.log('body', req.body)
         try {
             const inputDate = req.body.parameters.find(p => p.name === 'תאריך פטירה').value
             const next11MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 11)
             const responseData = {
                 "actions": [
-                    { "type": "SendMessage", "text": `תאריך העברי לאחר 11 חודשים הוא: ${next11MonthsDate} ` }
+                    { "type": "SendMessage", "text": `תאריך העברי של ${inputDate} לאחר 11 חודשים הוא: ${next11MonthsDate} ` }
                 ]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the date.')
         }
     }
 
-    //Post
     async next12Month(req, res) {
+        console.log('body', req.body)
         try {
             const inputDate = req.body.parameters.find(p => p.name === 'תאריך פטירה').value
             const next12MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 12)
             const responseData = {
                 "actions": [
-                    { "type": "SendMessage", "text": `תאריך העברי לאחר 12 חודשים הוא: ${next12MonthsDate} ` }
+                    { "type": "SendMessage", "text": `תאריך העברי של ${inputDate} לאחר 12 חודשים הוא: ${next12MonthsDate} ` }
                 ]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the date.')
         }
     }
+
 
     //Get
     async getNext11Month(req, res) {
@@ -59,10 +63,11 @@ class ZmanimService {
             const next11MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 11)
             const responseData = {
                 "actions": [
-                    { "type": "SendMessage", "text": `תאריך העברי לאחר 11 חודשים הוא: ${next11MonthsDate} ` }
+                    { "type": "SendMessage", "text": `תאריך העברי של ${inputDate} לאחר 11 חודשים הוא: ${next11MonthsDate} ` }
                 ]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the date.')
@@ -72,13 +77,14 @@ class ZmanimService {
     async getNext12Month(req, res) {
         try {
             const inputDate = req.query.d
-            const next11MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 12)
+            const next12MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 12)
             const responseData = {
                 "actions": [
-                    { "type": "SendMessage", "text": `תאריך העברי לאחר 12 חודשים הוא: ${next11MonthsDate} ` }
+                    { "type": "SendMessage", "text": `תאריך העברי של ${inputDate} לאחר 12 חודשים הוא: ${next12MonthsDate} ` }
                 ]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the date.')

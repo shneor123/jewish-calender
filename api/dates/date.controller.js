@@ -10,16 +10,18 @@ class DatesService {
         return hebDateStr
     }
 
+
     async convertHebreow(req, res) {
         console.log('body', req.body)
         try {
-            console.log(req.body)
-            const parameters = req.query.parameters
+            const parameters = req.body.parameters
             const hebDateString = parameters.find(p => p.name === 'תאריך עברי').value
             const hebDate = moment(hebDateString, 'DDMMYYYY').toDate()
             const hebDateObj = new Hebcal.HDate(hebDate)
             const hebDateStr = hebDateObj.toString('h')
-            const responseText = `${hebDateStr}`
+            // const responseText = `${hebDateStr}`
+            const responseText = `:התאריך העברי של ${hebDateString} :הוא ${hebDateStr}.`
+
             const responseData = {
                 "actions": [{ "type": "SendMessage", "text": responseText }]
             }
@@ -32,6 +34,7 @@ class DatesService {
     }
 
     async convertGregotrian(req, res) {
+        console.log('body', req.body)
         try {
             const parameters = req.body.parameters
             const hebrewDateString = parameters.find(p => p.name === 'תאריך לועזי').value
@@ -43,6 +46,7 @@ class DatesService {
                 "actions": [{ "type": "SendMessage", "text": responseText }]
             }
             res.json(responseData)
+            console.log(responseData)
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while converting the Hebrew date to Gregorian date.')
@@ -80,9 +84,11 @@ class DatesService {
             const todayHebrewDate = Hebcal.HDate(todayDate)
             const responseText = !gregorianDateString ? moment(todayDate).format('DD/MM/YYYY') : todayHebrewDate.toString('h')
             const responseData = {
-                "actions": [{ "type": "SendMessage", "text": responseText }]
+                "actions": [{ "type": "SendMessage", "text": `${responseText} התאריך הלועזי היום הוא:` }]
             }
             res.json(responseData)
+            console.log(responseData)
+
         } catch (error) {
             console.error(error)
             res.status(500).send('An error occurred while retrieving the date.')
@@ -90,6 +96,7 @@ class DatesService {
     }
 
 
+    //Get
     async getConvertDate(req, res) {
         try {
             const userInputDate = req.query.d
