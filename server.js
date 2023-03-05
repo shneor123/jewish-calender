@@ -16,7 +16,12 @@ app.use('/api/zmanim', zmanimRoutes)
 
 app.use('/', (req, res) => {
     console.log("hey")
-    res.send("hello world!")
+    const responseData = {
+        "actions": [
+            { "type": "SetParameter", "name": "branch", "value": "הפיח" }
+        ]
+    }
+    res.send(responseData)
 })
 
 const port = 3030
