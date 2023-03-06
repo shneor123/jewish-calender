@@ -24,7 +24,7 @@ class DatesService {
             const responseText = `:התאריך העברי של ${hebDateString} :הוא ${hebDateStr}.`
 
             const responseData = {
-                "actions": [{ "type": "SendMessage", "text": responseText }]
+                "actions": [{ "type": "InputText", "text": responseText }]
             }
             res.json(responseData)
             console.log(responseData)

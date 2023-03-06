@@ -2,9 +2,9 @@ const express = require('express')
 const { jewishService } = require('./date.controller')
 const router = express.Router()
 
-router.get('/', jewishService.getConvertDate)
-router.get('/gHeDate', jewishService.getHeDateTodey)
-router.get('/gDate', jewishService.getDateTodey)
+router.all('/', jewishService.getConvertDate)
+router.all('/gHeDate', jewishService.getHeDateTodey)
+router.all('/gDate', jewishService.getDateTodey)
 
 
 router.post('/date', jewishService.convertHebreow)
