@@ -14,9 +14,12 @@ app.use('/api/zmanim', zmanimRoutes)
 app.use('/api/omer', omerRoutes)
 
 
-app.use('/', (req, res) => {
+app.post('/', (req, res) => {
+    const responseData = {
+        "actions": [{ "type": "SendMessage", "text": "ספירת העומר הסתיימה לשנה זו!!" }]
+      }
     console.log("hey")
-    res.send("hello world!")
+    res.send(responseData)
 })
 
 const port = 3030
