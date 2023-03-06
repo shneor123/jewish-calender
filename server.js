@@ -15,11 +15,8 @@ app.use('/api/omer', omerRoutes)
 
 
 app.post('/', (req, res) => {
-    const responseData = {
-        "actions": [{ "type": "SendMessage", "text": "ספירת העומר הסתיימה לשנה זו!!" }]
-      }
     console.log("hey")
-    res.send(responseData)
+    res.json("hello world!!")
 })
 
 const port = 3030
