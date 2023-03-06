@@ -4,20 +4,20 @@ const HebrewCalendar = require("hebcal")
 class ZmanimService {
 
     static __calculateNextMonths(inputDate, numOfMonths) {
+        const dateRegex = /^(\d{1,2})[\-./]?(\d{1,2})[\-./]?(\d{4})$/
+        const match = inputDate.match(dateRegex)
         let date
-        if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(inputDate)) {
-            date = new Date(inputDate)
-            console.log("🚀 ~ date:", date)
+        if (match) {
+          const [_, day, month, year] = match
+          date = new Date(`${year}-${month}-${day}`)
         } else {
-            // date = new Date(inputDate)
-            date = new HebrewCalendar.HDate(inputDate).greg()
-            console.log("🚀 ~ else date:", date)
-
+          date = new HebrewCalendar.HDate(inputDate).greg()
         }
         const hebrewDate = HebrewCalendar.HDate(date)
         hebrewDate.setMonth(hebrewDate.getMonth() + numOfMonths)
         return hebrewDate.toString('h')
-    }
+      }
+      
 
     async next11Month(req, res) {
         console.log('body', req.body)
