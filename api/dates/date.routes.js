@@ -13,3 +13,4 @@ router.post('/zmanim/he', jewishService.heDateTodey)
 router.post('/zmanim', jewishService.gDateTodey)
 
 module.exports = router
+
