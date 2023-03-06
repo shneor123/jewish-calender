@@ -7,9 +7,11 @@ app.use(bodyParser.json())
 
 const datesRoutes = require('./api/dates/date.routes')
 const zmanimRoutes = require('./api/zmanim/zman.routes')
+const omerRoutes = require('./api/haOmer/omer.routes')
 
 app.use('/api/dates', datesRoutes)
 app.use('/api/zmanim', zmanimRoutes)
+app.use('/api/omer', omerRoutes)
 
 
 app.use('/', (req, res) => {
@@ -21,6 +23,16 @@ const port = 3030
 app.listen(port, () =>
     console.log(`Server is ready at ${port}`)
 )
+
+
+
+
+
+
+
+
+
+
 
 
 // app.get('/converted-date', async (req, res) => {
