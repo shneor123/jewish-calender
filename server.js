@@ -1,8 +1,5 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const moment = require('moment');
-const axios = require('axios');
-
 
 const app = express()
 app.use(express.json())
@@ -15,22 +12,40 @@ app.use('/api/dates', datesRoutes)
 app.use('/api/zmanim', zmanimRoutes)
 
 
-
 app.use('/', (req, res) => {
     console.log("hey")
-    const responseData = {
-        "actions": [
-            { "type": "SendMessage", "name": "branch", "value": "הפיח" }
-        ]
-    }
-    res.send(responseData)
+    res.send("hello world!")
 })
-
-
-
 
 const port = 3030
 app.listen(port, () =>
     console.log(`Server is ready at ${port}`)
 )
 
+
+// app.get('/converted-date', async (req, res) => {
+//     const { d, m, y, ass } = req.query
+//     console.log("🚀 ~ file: server.js:18 ~ app.get ~ req.query:", d, m, y, ass)
+
+//     const url = 'http://www.shoresh.org.il/dates/go.aspx'
+//     const params = { what: 'gth', d, m, y, res: 'txt', ass }
+
+//     try {
+//         const response = await axios.get(url, { params })
+//         console.log("🚀 ~ file: server.js:25 ~ app.get ~ response:", response.data)
+//         const responseData = response.data.trim()
+
+//         const hebDateString = responseData.split('\n')[0]
+//         const torahPortion = responseData.split('\n')[1]
+
+//         const responseText = `${hebDateString} ${torahPortion}`
+
+//         const responseDataObj = {
+//             "actions": [{ "type": "SendMessage", "text": responseText }]
+//         }
+//         res.json(responseDataObj)
+//     } catch (error) {
+//         console.error(error)
+//         res.status(500).send('An error occurred while fetching the converted date.')
+//     }
+// })
