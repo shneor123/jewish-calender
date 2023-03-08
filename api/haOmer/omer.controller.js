@@ -63,31 +63,34 @@ async function getRemindUser(req, res) {
 async function postRemindUser(req, res) {
   console.log(req.body)
   try {
-    const reminderMessage = await __getReminderMessage();
-    __sendResponse(res, reminderMessage);
+    const reminderMessage = await __getReminderMessage()
+    __sendResponse(res, reminderMessage)
   } catch (error) {
-    console.error(`Error in myAsyncFunction: ${error.message}`);
-    __sendResponse(res, null);
+    console.error(`Error in myAsyncFunction: ${error.message}`)
+    __sendResponse(res, null)
   }
 }
+
+
+
 
 
 async function postRegister(req, res) {
   console.log(req.body)
   try {
-    const { chat } = req.body;
-    const userId = chat.sender; // assuming that chat.sender contains the user's unique identifier
+    const { chat } = req.body
+    const userId = chat.sender // assuming that chat.sender contains the user's unique identifier
 
     // save user details to database or any other storage mechanism
     // you can also set a flag or attribute indicating that the user has registered for daily reminders
 
     // send confirmation message to user
-    const message = "You have successfully registered for daily reminders.";
-    await sendMessage(userId, message); // assuming that there is a function named sendMessage that sends a message to the user
-    res.status(200).json({ success: true });
+    const message = "You have successfully registered for daily reminders."
+    await sendMessage(userId, message) // assuming that there is a function named sendMessage that sends a message to the user
+    res.status(200).json({ success: true })
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, error: err.message });
+    console.error(err)
+    res.status(500).json({ success: false, error: err.message })
   }
 }
 

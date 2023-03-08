@@ -7,24 +7,24 @@ class DatesService {
     static __convertToHebDate(gDate) {
         const jsDate = new Date(gDate)
         const hDate = new Hebcal.HDate(jsDate)
-        const hebDateStr = hDate.toString('h')
+        const hebDateStr = hDate.toString("h")
         return hebDateStr
     }
 
 
-    async convertHebreow(req, res) {
+    async convertToHebrewDate(req, res) {
         console.log('body', req.body)
         try {
             const parameters = req.body.parameters
-            const hebDateString = parameters.find(p => p.name === 'תאריך עברי').value
+            let hebDateString = parameters.find(p => p.name === 'תאריך עברי').value
             const hebDate = moment(hebDateString, 'DDMMYYYY').toDate()
+            hebDateString = hebDateString.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3")
             const hebDateObj = new Hebcal.HDate(hebDate)
             const hebDateStr = hebDateObj.toString('h')
-            // const responseText = `${hebDateStr}`
             const responseText = `:התאריך העברי של ${hebDateString} :הוא ${hebDateStr}.`
 
             const responseData = {
-                "actions": [{ "type": "InputText", "text": responseText }]
+                "actions": [{ "type": "SendMessage", "text": responseText }]
             }
             res.json(responseData)
             console.log(responseData)
@@ -34,7 +34,7 @@ class DatesService {
         }
     }
 
-    async convertGregotrian(req, res) {
+    async convertToGregorianDate(req, res) {
         console.log('body', req.body)
         try {
             const parameters = req.body.parameters
@@ -54,7 +54,7 @@ class DatesService {
         }
     }
 
-    async heDateTodey(req, res) {
+    async getCurrentHebrewDate(req, res) {
         console.log('body', req.body)
         try {
             const hebDateString = req.body.parameters.find(p => p.name === 'תאריך עברי').value
@@ -77,7 +77,7 @@ class DatesService {
         }
     }
 
-    async gDateTodey(req, res) {
+    async getCurrentGregorianDate(req, res) {
         try {
             console.log('body', req.body)
             const gregorianDateString = req.body.parameters.find(p => p.name === 'תאריך לועזי').value
@@ -98,7 +98,7 @@ class DatesService {
 
 
     //Get
-    async getConvertDate(req, res) {
+    async convertDateToHeb(req, res) {
         try {
             const userInputDate = req.query.d
             const date = new Date(userInputDate)
@@ -133,7 +133,7 @@ class DatesService {
         }
     }
 
-    async getDateTodey(req, res) {
+    async getGregorianDateToday(req, res) {
         try {
             const gDate = new Date()
             const responseText = `התאריך לועזי היום הוא: ${moment(gDate).format('DD/MM/YYYY')}`
@@ -147,7 +147,7 @@ class DatesService {
         }
     }
 
-    async getHeDateTodey(req, res) {
+    async getHebrewDateToday(req, res) {
         try {
             const hebDate = DatesService.__convertToHebDate(new Date())
             const responseText = `התאריך העברי היום הוא: ${hebDate}`

@@ -22,7 +22,8 @@ class ZmanimService {
     async next11Month(req, res) {
         console.log('body', req.body)
         try {
-            const inputDate = req.body.parameters.find(p => p.name === 'תאריך פטירה').value
+            let inputDate = req.body.parameters.find(p => p.name === 'תאריך פטירה').value
+            inputDate = inputDate.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3")
             const next11MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 11)
             const responseData = {
                 "actions": [
@@ -40,7 +41,8 @@ class ZmanimService {
     async next12Month(req, res) {
         console.log('body', req.body)
         try {
-            const inputDate = req.body.parameters.find(p => p.name === 'תאריך פטירה').value
+            let inputDate = req.body.parameters.find(p => p.name === 'תאריך פטירה').value
+            inputDate = inputDate.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3")
             const next12MonthsDate = ZmanimService.__calculateNextMonths(inputDate, 12)
             const responseData = {
                 "actions": [

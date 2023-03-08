@@ -14,7 +14,7 @@ app.use('/api/zmanim', zmanimRoutes)
 app.use('/api/omer', omerRoutes)
 
 
-app.post('/', (req, res) => {
+app.use('/', (req, res) => {
     console.log("hey")
     res.json("hello world!!")
 })
