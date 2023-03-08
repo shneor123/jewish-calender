@@ -2,6 +2,7 @@ const Hebcal = require("hebcal")
 const moment = require('moment')
 
 
+
 class DatesService {
 
     static __convertToHebDate(gDate) {
@@ -9,6 +10,21 @@ class DatesService {
         const hDate = new Hebcal.HDate(jsDate)
         const hebDateStr = hDate.toString("h")
         return hebDateStr
+    }
+
+    static __calculateNextMonths(inputDate, numOfMonths) {
+        const dateRegex = /^(\d{1,2})[\-./]?(\d{1,2})[\-./]?(\d{4})$/
+        const match = inputDate.match(dateRegex)
+        let date
+        if (match) {
+            const [_, day, month, year] = match
+            date = new Date(`${year}-${month}-${day}`)
+        } else {
+            date = new HebrewCalendar.HDate(inputDate).greg()
+        }
+        const hebrewDate = HebrewCalendar.HDate(date)
+        hebrewDate.setMonth(hebrewDate.getMonth() + numOfMonths)
+        return hebrewDate.toString('h')
     }
 
 
@@ -95,6 +111,27 @@ class DatesService {
             res.status(500).send('An error occurred while retrieving the date.')
         }
     }
+
+
+    async getBarMitzvahDate(req, res) {
+        try {
+            console.log(req.body)
+            const dob = req.body.parameters.find(param => param.name === 'חשבון בר מצווה').value
+            // Parse the date of birth using Moment.js and add 13 years to get the date of bar mitzvah
+            const barMitzvahDate = moment(dob, 'DD/MM/YYYY').add(13, 'years').format('DD/MM/YYYY')
+            const hebDate = DatesService.__convertToHebDate(barMitzvahDate)
+            const responseData = {
+                "actions": [{ "type": "SendMessage", "text": `The date of bar mitzvah is ${hebDate}` }]
+            }
+            console.log(`The date of bar mitzvah is ${barMitzvahDate}`)
+
+            res.json(responseData)
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('An error occurred while calculating the Bar Mitzvah date.')
+        }
+    }
+
 
 
     //Get

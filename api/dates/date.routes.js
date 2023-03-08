@@ -5,6 +5,7 @@ const router = express.Router()
 router.all('/', jewishService.convertDateToHeb)
 router.all('/gHeDate', jewishService.getHebrewDateToday)
 router.all('/gDate', jewishService.getGregorianDateToday)
+router.post('/barmitzvh', jewishService.getBarMitzvahDate)
 
 
 router.post('/date', jewishService.convertToHebrewDate)

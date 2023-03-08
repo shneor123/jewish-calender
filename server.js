@@ -14,7 +14,9 @@ app.use('/api/zmanim', zmanimRoutes)
 app.use('/api/omer', omerRoutes)
 
 
+
 app.use('/', (req, res) => {
+    // throw new Error()
     console.log("hey")
     res.json("hello world!!")
 })
@@ -23,7 +25,6 @@ const port = 3030
 app.listen(port, () =>
     console.log(`Server is ready at ${port}`)
 )
- 
 
 
 
@@ -36,6 +37,17 @@ app.listen(port, () =>
 
 
 
+
+
+
+
+
+// app.use(function(err, req, res, next) {
+//     if(!err)
+//     return next();
+//     console.log(err);
+//     res.send();
+// });
 
 
 
@@ -67,3 +79,5 @@ app.listen(port, () =>
 // })
 // ssh root@103.95.119.14
 // bnkSDCKwr83hiorq0_j
+//  sudo lsof -i :3030
+//  kill -9 <pid>

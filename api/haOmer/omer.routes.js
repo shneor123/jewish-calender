@@ -1,11 +1,11 @@
 const express = require('express')
-const { getRemindUser, postRemindUser, postRegister } = require('./omer.controller')
+const { getRemindUser, postRemindUser, getRemind } = require('./omer.controller')
 const router = express.Router()
 
-router.get('/', getRemindUser)
+router.get('/', getRemind)
 
 router.post('/date', postRemindUser)
-router.post('/register', postRegister)
+router.post('/register', getRemindUser)
 
 
 module.exports = router

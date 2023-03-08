@@ -14,13 +14,15 @@
     "cors": "^2.8.5",
     "date-and-time": "^2.4.2",
     "express": "^4.18.2",
+    "forever-monitor": "^3.0.3",
     "hebcal": "^2.3.2",
     "luxon": "^3.3.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.41",
     "mongodb": "^5.0.1",
     "node-cron": "^3.0.2",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "zmanim": "0.0.1"
   },
   "devDependencies": {
     "ngrok": "^4.3.3"
